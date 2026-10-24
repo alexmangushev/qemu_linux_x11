@@ -1,0 +1,27 @@
+#!/bin/sh
+
+. ./config.sh
+
+[ -z "`grep safe-path ~/.gdbinit`" ] && echo 'Add "set auto-load safe-path /" to your ~/.gdbinit (or limit to this directory)'
+
+# Fedora
+#sudo dnf install ncurses-devel perl-ExtUtils-MakeMaker ninja-build glib2-devel pixman-devel libslirp-devel perl-IPC-Cmd perl-open lz4 gawk libmpc-devel gmp-devel perl-Time-Piece python3-setuptools
+# Ubuntu
+#sudo apt install libncurses-dev libextutils-makemaker-cpanfile-perl ninja-build libglib2.0-dev libpixman-1-dev libslirp-dev libipc-run-perl lz4 gawk libmpc-dev libgmp-dev python3-setuptools
+
+# Download the Bootling "bleeding edge" toolchain, and unpack it to the /opt/toolchains:
+# wget "https://toolchains.bootlin.com/downloads/releases/toolchains/riscv64-lp64d/tarballs/riscv64-lp64d--glibc--bleeding-edge-2025.08-1.tar.xz"
+
+git clone git://git.busybox.net/buildroot
+cd buildroot; git checkout 2026.08; cd ..
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+cd linux; git checkout v7.2; cd ..
+git clone https://github.com/riscv-software-src/opensbi.git
+cd opensbi; git checkout v1.9; cd ..
+git clone https://github.com/qemu/qemu.git
+cd qemu; git checkout v11.1.1; cd ..
+git clone https://git.u-boot-project.org/u-boot/u-boot.git
+cd u-boot; git checkout v2026.07; cd ..
+
+mkdir -p output
+mkdir -p $ROOTFS_OVERLAY

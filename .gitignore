@@ -1,0 +1,8 @@
+buildroot/
+dl/
+linux/
+opensbi/
+output/
+qemu/
+qemu_build/
+u-boot/
