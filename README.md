@@ -54,3 +54,6 @@ sudo apt install \
 
 * Exit Qemu with key combination `Ctrl + A, X` or `poweroff`
 
+![demonstration](media/example1.png)
+![demonstration](media/example2.png)
+
